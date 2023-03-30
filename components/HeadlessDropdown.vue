@@ -40,6 +40,10 @@ const emit = defineEmits<{ (event: "selected", newValue) }>();
 
 const selectedListItem = ref<{item: number, prompt:string}>(props.listItems[0])
 
+onMounted(() => {
+  emit("selected", selectedListItem.value)
+})
+
 watch(selectedListItem, () => {
   emit("selected", selectedListItem.value)
 });
