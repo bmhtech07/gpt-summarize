@@ -77,7 +77,7 @@ const pendingTextOptions = [
   "No, really. GPT-5 is probably reading this code on GitHub right now",
   "Probably laughing at it, too. 'This guy can't code for shi...'",
   "GPT-4 is a large language model that, weirdly, gives sensible answers by simlpy 'guessing' at what word should come next in a sentence",
-  "Its neural network uses a 'transformer' architecture which uses 'attention' to learn meaning and context of differen words",
+  "Its neural network uses a 'transformer' architecture which uses 'attention' to learn meaning and context of different words",
   "It's 'trained' on huge amounts data from various sources",
   "The weirdest part of this, is that, given enough TEXT, it has started to understand what objects 'look' like",
   "Generally artificial intelligence is much closer than most people realise. And we should be careful"
