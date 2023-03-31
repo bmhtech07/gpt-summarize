@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { prompts } from '../../../config/prompts';
+import { prompts } from '../../config/prompts';
 
 export const validateSummarize = z.object({
   report: z.string().max(40000).min(1000),

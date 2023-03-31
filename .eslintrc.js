@@ -18,7 +18,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": 0,
     indent: ["error", 2],
     // quotes: ["error", "double"],
-    semi: ["error", "always"],
+    // semi: ["error", "always"],
     "vue/max-attributes-per-line": ["error", {
       "singleline": { "max": 6 },      
       "multiline": { "max": 4 }
@@ -27,8 +27,8 @@ module.exports = {
     "no-console": "off",
     "vue/multi-word-component-names": "off",
     "linebreak-style": ["error", "unix"],
-    "vue/html-indent": ["error", 2, type, {
-       "alignAttributesVertically": false,
+    "vue/html-indent": ["error", 2, {
+      "alignAttributesVertically": false,
     }],
   },
 };

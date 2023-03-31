@@ -1,6 +1,6 @@
 import { Configuration, OpenAIApi } from 'openai';
 import { prompts as promptOptions } from '~~/config/prompts';
-import { validateSummarize } from './utils/summarizeValidator';
+import { validateSummarize } from '../utils/summarizeValidator';
 
 const configuration = new Configuration({
   organization: process.env.OPENAI_ORG_ID,
@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
       messages: [{ role: "user", content: `${prompt} ${report}` }],
       temperature: 0,
     })
-    return response
+    return response.data.choices[0].message.content
   } catch (err) {
     console.log("Error fetching OpenAI: ", err)
     return err
