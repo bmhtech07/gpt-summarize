@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* TRANSITIONS */
+
+/***  TRANSITIONS AND ANIMATIONS ***/
 
 .v-enter-active,
 .v-leave-active {
@@ -12,4 +13,42 @@
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 2s ease-in;
+}
+
+.list-enter-active {
+  transition: all 1s ease;
+}
+
+.list-enter-from {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.slide-fade-leave-active {
+  transition: all 2s cubic-bezier(1, 0.1, .1, 2);
+}
+
+/* .slide-fade-enter-from, */
+.slide-fade-leave-to {
+  transform: translateX(400px);
+  opacity: 0;
+}
+
+.slide-enter-from {
+  transform: translateX(400px);
+}
+
+.slide-left-enter-from,
+.slide-left-leave-to {
+  transform: translateX(300px);
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.5s ease-in-out;
 }

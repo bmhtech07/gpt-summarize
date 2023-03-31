@@ -1,5 +1,5 @@
 import { Configuration, OpenAIApi } from 'openai';
-import { prompts as promptOptions } from '~~/config/prompts';
+import { prompts as promptOptions } from '~~/config';
 import { validateSummarize } from '../utils/summarizeValidator';
 
 const configuration = new Configuration({
