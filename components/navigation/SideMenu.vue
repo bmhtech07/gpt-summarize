@@ -11,7 +11,7 @@
           >
             <NuxtLink
               :to="{ name: item.name }"
-              class="flex px-8 py-2 hover:bg-emerald-400 transition-colors duration-200 w-full font-semibold md:font-regular hover:text-white hover:font-medium"
+              class="flex px-8 py-2 transition-colors duration-200 w-full font-semibold md:font-regular hover:bg-emerald-50  hover:font-medium"
             >
               {{ item.display }}
             </NuxtLink>
