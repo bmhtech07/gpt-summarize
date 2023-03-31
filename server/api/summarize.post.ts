@@ -20,7 +20,8 @@ export default defineEventHandler(async (event) => {
       messages: [{ role: "user", content: `${prompt} ${report}` }],
       temperature: 0,
     })
-    return response.data.choices[0].message.content
+    console.log(response);
+    return response.data.choices[0]
   } catch (err) {
     console.log("Error fetching OpenAI: ", err)
     return err

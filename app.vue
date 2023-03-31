@@ -52,14 +52,13 @@ const formData = ref<FormData>({
 
 const submit = () => {
   pending.value = true;
-  $fetch('/api/summarise',  {
+  $fetch('/api/summarize',  {
     method: "POST",
     body: formData.value
   })
     .then((res: any) => {
       pending.value = false;
-      console.log(res.choices[0].message.content);
-      response.value = res.choices[0].message.content;
+      response.value = res.message.content
     })
     .catch((err) => {
       pending.value = false;
