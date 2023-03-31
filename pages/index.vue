@@ -11,7 +11,10 @@
       <div class="flex items-center">
         <InformationCircleIcon class="w-8 h-8 mr-4 fill-emerald-700" />
         <p class="text-gray-400 text-sm">
-          GPT-4 is expensive to run. It costs around $0.15 per summary, so please don't abuse us! We're self-funded, so if you'd like to contribute, please <NuxtLink to="/contact" class="underline">contact us</NuxtLink>.
+          GPT-4 is expensive to run. It costs around $0.15 per summary, so please don't abuse us! We're self-funded, so if you'd like to contribute, please 
+          <a href="https://github.com/bmhtech07/gpt-summarize" target="_blank" class="underline">
+            contact us
+          </a>.
         </p>
       </div>
     </div>
