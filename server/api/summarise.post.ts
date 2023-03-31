@@ -1,5 +1,6 @@
 import { Configuration, OpenAIApi } from 'openai';
 import { prompts as promptOptions } from '~~/config/prompts';
+import { validateSummarize } from './utils/summarizeValidator';
 
 const configuration = new Configuration({
   organization: process.env.OPENAI_ORG_ID,
@@ -9,19 +10,19 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 export default defineEventHandler(async (event) => {
-  const { prompt: formPrompt, report } = await readBody(event)
-  const prompt = promptOptions[formPrompt].prompt; // Reconsile form prompt against our list of prompts
-  console.log("prompt: ", prompt);
   try {
+    const body = await readBody(event)
+    validateSummarize.parse(body)
+    const { prompt: formPrompt, report } = body
+    const prompt = promptOptions[formPrompt].prompt; // Validate form prompt against our list of prompts
     const response = await openai.createChatCompletion({
       model: 'gpt-4',
       messages: [{ role: "user", content: `${prompt} ${report}` }],
       temperature: 0,
     })
-    console.log("Response: ", response.data.choices[0].message.content);
-    return response.data;
+    return response
   } catch (err) {
-    console.log("Error fetching OpenAI: ", err);
-    return err;
+    console.log("Error fetching OpenAI: ", err)
+    return err
   }
 });
