@@ -5,7 +5,7 @@
       Summarize long-form data with GPT-4
     </h1>
     <h2 class="text-gray-500">
-      This app uses GPT-4's API. The GPT-4 can handle up to 8000 'tokens' in a single input and output combined. A token is about a word in length, so you can receive a summary on text up to 40,000 characters.  
+      This app uses GPT-4's API. The API can handle up to 8000 'tokens' in a single input and output combined. A token is about a word in length, so you can receive a summary on text up to 40,000 characters.  
     </h2>
     <div class="p-4 bg-gray-50 rounded-lg">
       <div class="flex items-center">
