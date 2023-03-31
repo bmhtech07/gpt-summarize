@@ -19,6 +19,17 @@
       </div>
     </div>
     <textarea v-model="formData.report" placeholder="Paste your text here up to a maximum of 40,000 characters..." rows="8" maxlength="40000" class="mt-16 p-2 rounded-lg shadow-md border-gray-100 text-gray-500 focus:outline-emerald-300" />
+    <Transition>
+      <div v-if="error" class="p-4 border border-amber-400 rounded-lg">
+        <div class="flex items-center">
+          <ExclamationTriangleIcon class="w-8 h-8 mr-4 stroke-amber-400" />
+          <p class="text-gray-500 text-sm">
+            <span class="font-semibold">Oh no!</span>
+            It looks like GPT returned an error. This is most likely because the text passed in was too long. Try shortening the text and try again.
+          </p>
+        </div>
+      </div>
+    </Transition>
     <div class="flex flex-wrap sm:flex-nowrap sm:space-x-8 space-y-4 sm:space-y-0">
       <HeadlessDropdown :list-items="promptOptions" class="w-full" @selected="formData.prompt = $event.item" />
       <button class="w-full sm:w-56 px-3 py-2 rounded-lg bg-emerald-500 font-semibold text-gray-100 hover:bg-emerald-600 hover:text-white disabled:opacity-70" :disabled="pending" @click="submit">
@@ -57,6 +68,7 @@
 <script setup lang="ts">
 import { prompts as promptOptions } from '~~/config/index.js';
 import { InformationCircleIcon } from '@heroicons/vue/20/solid';
+import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline';
 
 interface FormData {
   report: any,
@@ -66,7 +78,9 @@ interface FormData {
 
 const pending = ref<boolean>(false)
 const response = ref<string | null>(null)
+const error = ref<any>(null)
 const pendingTextOption = ref<number>(0)
+const intervalId = ref<number | undefined>(undefined)
 const formData = ref<FormData>({
   report: null,
   prompt: null
@@ -88,32 +102,36 @@ const pendingTextOptions = [
 
 watch(pending, () => {
   if (pending.value) {
+    console.log("pending has a value");
     revolveText()
   } else {
-    clearInterval(revolveText)
+    console.log("pending has NO value");
+    if (intervalId.value) clearInterval(intervalId.value)
     pendingTextOption.value = 0
   }
 })
 
 const revolveText = () => {  
-  setInterval(() => {
+  intervalId.value =  setInterval(() => {
     pendingTextOption.value === 10 ? pendingTextOption.value = 6 : pendingTextOption.value ++
   }, 5000)
 }
 
 const submit = () => {
-  pending.value = true;
+  pending.value = true
+  error.value = null
   $fetch('/api/summarize',  {
     method: "POST",
     body: formData.value
   })
     .then((res: any) => {
-      pending.value = false;
+      pending.value = false
       response.value = res.message.content
     })
     .catch((err) => {
-      pending.value = false;
-      console.log(err);
+      pending.value = false
+      console.log(err)
+      error.value = err
     })
 };
 
