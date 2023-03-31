@@ -1,6 +1,20 @@
 <!-- eslint-disable max-len -->
 <template>
   <div class="container mx-auto flex flex-col justify-center max-w-4xl px-2 sm:px-8 md:px-16 space-y-8">
+    <h1 class="text-2xl font-semibold text-emerald-800">
+      Summarize long-form data with GPT-4
+    </h1>
+    <h2 class="text-gray-500">
+      GPT-4 can handle up to 8000 'tokens' in a single input and output combined. A token is about a word in length, so you can paste in up to 40,000 characters in this summary. 
+    </h2>
+    <div class="p-4 bg-gray-50 rounded-lg">
+      <div class="flex items-center">
+        <InformationCircleIcon class="w-8 h-8 mr-4 fill-emerald-700" />
+        <p class="text-gray-400 text-sm">
+          GPT-4 is expensive to run. It costs around $0.15 per summary, so please don't abuse us! We're self-funded, so if you'd like to contribute, please <NuxtLink to="/contact" class="underline">contact us</NuxtLink>.
+        </p>
+      </div>
+    </div>
     <textarea v-model="formData.report" placeholder="Paste your text here up to a maximum of 40,000 characters..." rows="8" maxlength="40000" class="mt-16 p-2 rounded-lg shadow-md border-gray-100 text-gray-500 focus:outline-emerald-300" />
     <div class="flex flex-wrap sm:flex-nowrap sm:space-x-8 space-y-4 sm:space-y-0">
       <HeadlessDropdown :list-items="promptOptions" class="w-full" @selected="formData.prompt = $event.item" />
@@ -39,6 +53,7 @@
 
 <script setup lang="ts">
 import { prompts as promptOptions } from '~~/config/index.js';
+import { InformationCircleIcon } from '@heroicons/vue/20/solid';
 
 interface FormData {
   report: any,
