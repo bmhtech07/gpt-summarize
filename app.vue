@@ -1,7 +1,7 @@
 <!-- eslint-disable max-len -->
 <template>
   <div class="container mx-auto flex flex-col max-w-3xl space-y-8 justify-center">
-    <textarea v-model="formData.report" placeholder="Paste your text here" rows="8" class="mt-16 p-2 rounded-lg shadow-md border-gray-100 text-gray-500 focus:outline-emerald-300" />
+    <textarea v-model="formData.report" placeholder="Paste your text here up to a maximum of 40,000 characters..." rows="8" maxlength="40000" class="mt-16 p-2 rounded-lg shadow-md border-gray-100 text-gray-500 focus:outline-emerald-300" />
     <div class="flex space-x-8">
       <HeadlessDropdown :list-items="promptOptions" class="w-full" @selected="formData.prompt = $event.item" />
       <button class="w-56 px-3 py-2 rounded-lg bg-emerald-400 font-semibold text-gray-100 disabled:opacity-70" :disabled="pending" @click="submit">
@@ -9,33 +9,29 @@
           Summarize
         </div>
         <div v-else class="flex items-center transition-all duration-500">
-          <Icon name="spinner" class="mr-2 h-5 w-5 dark:text-white fill-white stroke-white left-1/2 top-1/2 animate-spin transition-opacity" />
+          <Icon name="spinner" class="mr-2 h-5 w-5 fill-white stroke-white left-1/2 top-1/2 animate-spin transition-opacity" />
           Processing...
         </div> 
       </button>
     </div>
-    <Transition>
-      <div v-if="pending" class="flex flex-col justify-center my-auto mx-auto">
-        <h5 class="text-lg">
-          Processing
-        </h5>
-        <div class="flex space-x-8 ">
-          <ExclamationTriangleIcon class="w-8 h-8" />
+    <div class="h-96">
+      <Transition mode="out-in">
+        <div v-if="pending" class="flex flex-col h-full justify-center items-center text-gray-500">
+          <Icon name="spinner" class="mr-2 h-8 w-8 fill-white stroke-white left-1/2 top-1/2 animate-spin transition-opacity" />
           <p class="">
             This can sometimes take a while depending on the length of the text passed in
           </p>
         </div>
-      </div>
-      <div v-else-if="response" class="whitespace-pre-wrap text-lg text-gray-500">
-        {{ response }}
-      </div>
-    </Transition>
+        <div v-else-if="response" class="whitespace-pre-wrap text-gray-500 overflow-scroll">
+          {{ response }}
+        </div>
+      </Transition>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { prompts as promptOptions } from '~~/config/prompts';
-import { ExclamationTriangleIcon } from '@heroicons/vue/20/solid';
 
 interface FormData {
   report: any,
