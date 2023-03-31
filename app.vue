@@ -12,7 +12,16 @@
       </button>
     </div>
     <Transition>
-      <div v-if="response" class="whitespace-pre-wrap text-lg text-gray-500">
+      <div v-if="pending" class="flex flex-col justify-center my-auto mx-auto">
+        <h5 class="text-lg">Processing</h5>
+        <div class="flex space-x-8 ">
+          <ExclamationTriangleIcon class="w-8 h-8" />
+          <p class="">
+            This can sometimes take a while depending on the length of the text passed in
+          </p>
+        </div>
+      </div>
+      <div v-else-if="response" class="whitespace-pre-wrap text-lg text-gray-500">
         {{ response }}
       </div>
     </Transition>
@@ -21,6 +30,7 @@
 
 <script setup lang="ts">
 import { prompts as promptOptions } from '~~/config/prompts';
+import { ExclamationTriangleIcon } from '@heroicons/vue/20/solid';
 
 const pending = ref<boolean>(false);
 const response = ref<string | null>(null);
