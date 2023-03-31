@@ -2,6 +2,6 @@
 <template>
   <div id="app" class="">
     <Header />
-    <NuxtPage />
+    <NuxtPage class="min-h-screen" />
   </div>
 </template>

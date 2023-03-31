@@ -3,7 +3,7 @@
   <Transition>
     <div v-if="navMenuActive" class="opacity-20 bg-black fixed top-0 left-0 h-screen w-full z-50" @click="toggleMobileMenu" />
   </Transition>
-  <nav id="header" class="flex justify-between items-center h-16 px-4 md:px-8 bg-white border-b sticky top-0 z-[49]">
+  <nav id="header" class="flex justify-between items-center h-16 px-4 md:px-8 bg-gray-50 sticky top-0 z-[49]">
     <NuxtLink :to="{ name: 'index' }" class="flex items-center text-2xl font-bold text-emerald-500">
       <Icon name="send-joy" class="w-7 h-7 mr-2 stroke-slate-100 stroke-[30]" />
       <h1 class="hidden sm:flex">
@@ -16,9 +16,9 @@
       </Transition>
     </NuxtLink>
     <div class="flex items-center space-x-6">
-      <Transition>
+      <!-- <Transition>
         <SupportButton v-show="!navMenuActive" emoji class="py-0.5 px-2 hidden md:flex" />
-      </Transition>
+      </Transition> -->
       <button class="flex items-center justify-center w-12 h-12 rounded-full bg-gray-50 hover:border-emerald-700 hover:border z-10" @click="(toggleMobileMenu)">
         <Bars3Icon class="m-4 h-6 w-6 fill-emerald-600" />
       </button>
