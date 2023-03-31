@@ -4,7 +4,7 @@
     <textarea v-model="formData.report" placeholder="Paste your text here up to a maximum of 40,000 characters..." rows="8" maxlength="40000" class="mt-16 p-2 rounded-lg shadow-md border-gray-100 text-gray-500 focus:outline-emerald-300" />
     <div class="flex space-x-8">
       <HeadlessDropdown :list-items="promptOptions" class="w-full" @selected="formData.prompt = $event.item" />
-      <button class="w-56 px-3 py-2 rounded-lg bg-emerald-400 font-semibold text-gray-100 disabled:opacity-70" :disabled="pending" @click="submit">
+      <button class="w-56 px-3 py-2 rounded-lg bg-emerald-400 font-semibold text-gray-100 hover:bg-emerald-500 hover:text-white disabled:opacity-70" :disabled="pending" @click="submit">
         <div v-if="!pending">
           Summarize
         </div>
@@ -22,8 +22,13 @@
             This can sometimes take a while depending on the length of the text passed in
           </p>
         </div>
-        <div v-else-if="response" class="whitespace-pre-wrap text-gray-500 overflow-scroll">
-          {{ response }}
+        <div v-else-if="response" class="p-2">
+          <div class="flex justify-end">
+            <CopyButton :copy-target="response" />
+          </div>
+          <div class="whitespace-pre-wrap mt-6 text-gray-500 overflow-scroll">
+            {{ response }}
+          </div>
         </div>
       </Transition>
     </div>
@@ -45,6 +50,7 @@ const formData = ref<FormData>({
   prompt: null
 });
 
+const { copied, copyToClipboard } = useCopy(response.value);
 
 const submit = () => {
   pending.value = true;
